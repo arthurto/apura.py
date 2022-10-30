@@ -1,4 +1,4 @@
-# Importando a biblioteca requests
+# Importando bibliotecas úteis
 import requests 
 import time
 
@@ -11,19 +11,27 @@ import time
 url = "https://resultados.tse.jus.br/oficial/ele2022/545/dados-simplificados/br/br-c0001-e000545-r.json"
 
 while True:
-    # os.system('cls' if os.name == 'nt' else 'clear')
-    # Pegando os dados
+
+    # Otendo os dados através de um GET request
     resp = requests.get(url)
+
+    # Convertendo as informações em JSON -> dict 
     resp = resp.json()
 
-    # Separando os candidatos
+    # Selecionando as informações dos candidatos
     candidatos = resp['cand']
-    print(50*'-')
-    print(f" ------- TOTAL DE URNAS APURADAS {resp['pst']} -------")
-    print(50*'-')
+
+    # Deixando tudo bonitinho
+    print(f"\n ------- TOTAL DE URNAS APURADAS {resp['pst']} ------- \n")
+
+    # Organizando a formatação da tabela (Obrigado Rafa!)
     print("{:20} {:10} {:10}".format("NOME","VOTOS","VOTOS TOTAL"))
+
+    # Loop nos candidatos 
     for candidato in candidatos:
-        n_1 = 20 - len(candidato['nm'])
-        n_2 = 10 
+
+        # Printando informações de cada candidato
         print("{:20} {:10} {:10}".format(candidato['nm'],candidato['pvap'],candidato['vap']))
+
+    # Atualizando a cada meio segundo para não sobrecarregar a API
     time.sleep(0.5)
