@@ -1,6 +1,5 @@
 # Importando a biblioteca requests
 import requests 
-import os 
 import time
 
 # Definindo o URL dos dados oficiais do TSE
